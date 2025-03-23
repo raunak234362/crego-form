@@ -135,30 +135,44 @@ const loanSchema: RJSFSchema = {
 
 
 const uiSchema: UiSchema = {
-  businessDetails: {
-    directors: {
-      "ui:options": {
-        addButtonText: "Add Director", // Set the label for the add button
-        addable: true, // Allow adding new directors
-        removable: true, // Allow removing directors
-        orderable: true, // Allow reordering directors
+  properties:{
+    "ui:border": "1px solid black",
+  },
+  gstin: {
+    "ui:placeholder": "Enter GSTIN",
+  },
+  businessName: {
+    "ui:placeholder": "Enter Business Name",
+  },
+  directors: {
+    "ui:options": {
+      addButtonText: "➕ Add Director", // Fixing the button label
+      addable: true, 
+      removable: true, 
+      orderable: true, 
+    },
+    items: {
+      name: {
+        "ui:placeholder": "Enter Director Name",
       },
-      items: {
-        name: {
-          "ui:placeholder": "Enter Director Name",
-        },
-        panNumber: {
-          "ui:placeholder": "Enter PAN Number",
-        },
-        tags: {
-          "ui:widget": "checkboxes",
+      panNumber: {
+        "ui:placeholder": "Enter PAN Number",
+      },
+      tags: {
+        "ui:widget": "checkboxes",
+        "ui:options": {
+          inline: true, // Fix checkbox styling
         },
       },
     },
   },
 };
 
+
 export default function BusinessForm() {
+  const onSubmit = (data: IChangeEvent) => {
+    console.log("Form submitted with data:", data);
+  }
   return (
     <Box className="container" bg="gray.500" h="100vh" display="flex" flexDirection="column" alignItems="center">
       <h1 >Business Loan Form</h1>
@@ -177,9 +191,7 @@ export default function BusinessForm() {
               schema={businessSchema}
               validator={validator}
               uiSchema={uiSchema}
-              onSubmit={(data) => {
-                console.log("Form submitted with data:", data.formData);
-              }}
+              onSubmit={onSubmit}
               onError={(errors) => {
                 console.error("Form validation errors:", errors);
               }}
