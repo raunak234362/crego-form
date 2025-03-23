@@ -1,5 +1,6 @@
 import Form from "@rjsf/core";
 import { RJSFSchema, UiSchema } from "@rjsf/utils";
+import { IChangeEvent } from "@rjsf/core";
 import validator from "@rjsf/validator-ajv8";
 import { Tabs, Box, Button } from "@chakra-ui/react";
 
@@ -170,6 +171,8 @@ const uiSchema: UiSchema = {
 
 
 export default function BusinessForm() {
+  
+
   const onSubmit = (data: IChangeEvent) => {
     console.log("Form submitted with data:", data);
   }
